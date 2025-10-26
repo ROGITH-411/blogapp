@@ -1,0 +1,7 @@
+#!/bin/sh
+# Apache Maven Wrapper (copied)
+# Note: keep executable bit if using Unix. On Windows use mvnw.cmd
+
+set -e
+scriptDir="$(dirname "$0")"
+"$scriptDir/.mvn/wrapper/maven-wrapper.jar" "$@"
