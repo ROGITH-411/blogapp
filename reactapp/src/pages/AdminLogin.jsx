@@ -29,7 +29,7 @@ export default function AdminLogin() {
     setIsSubmitting(true)
     
     try {
-      const response = await fetch('http://localhost:8081/api/blogs?page=0&size=1', {
+      const response = await fetch('https://blogapp-production-66d9.up.railway.app/api/blogs?page=0&size=1', {
         method: 'GET',
         headers: {
           'Authorization': 'Basic ' + btoa(`${username.trim()}:${password.trim()}`),
@@ -48,7 +48,7 @@ export default function AdminLogin() {
       }
     } catch (err) {
       console.error('Login failed:', err)
-      setError('Network error. Please check if backend is running on port 8081.')
+      setError('Network error. Please check your connection and try again.')
     } finally {
       setIsSubmitting(false)
     }

@@ -57,7 +57,7 @@ const CommentSection = ({ blogId, blogAuthor, blogTitle }) => {
     
     try {
       const auth = localStorage.getItem('basicAuth') || btoa('admin:adminpass')
-      const response = await fetch(`http://localhost:8081/api/blogs/${blogId}/comments/${commentId}`, {
+      const response = await fetch(`https://blogapp-production-66d9.up.railway.app/api/blogs/${blogId}/comments/${commentId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Basic ${auth}` }
       })

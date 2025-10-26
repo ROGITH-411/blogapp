@@ -27,7 +27,7 @@ export default function Register() {
 
     setIsSubmitting(true)
     try {
-      const response = await fetch('http://localhost:8081/api/users/register', {
+      const response = await fetch('https://blogapp-production-66d9.up.railway.app/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ export default function Register() {
         setError(data.error || 'Registration failed')
       }
     } catch (err) {
-      setError('Network error. Please check if backend is running on port 8081.')
+      setError('Network error. Please check your connection and try again.')
     } finally {
       setIsSubmitting(false)
     }

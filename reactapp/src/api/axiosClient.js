@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE || 'http://localhost:8081',
+  baseURL: import.meta.env.VITE_API_BASE || 'https://blogapp-production-66d9.up.railway.app',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -42,7 +42,7 @@ api.interceptors.response.use(
   error => {
     console.error('API Error:', error)
     if (error.code === 'ECONNREFUSED' || error.code === 'ERR_NETWORK') {
-      console.error('Backend server is not reachable (expected http://localhost:8081).')
+      console.error('Backend server is not reachable.')
     }
     return Promise.reject(error)
   }

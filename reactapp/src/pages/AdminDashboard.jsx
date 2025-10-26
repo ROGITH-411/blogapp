@@ -46,7 +46,7 @@ export default function AdminDashboard() {
       }
       
       // Fetch blogs with pagination and sorting
-      const blogsResponse = await fetch(`http://localhost:8081/api/blogs?page=${page}&size=${pageSize}&sort=${sort},${order}${authorFilter}`, {
+      const blogsResponse = await fetch(`https://blogapp-production-66d9.up.railway.app/api/blogs?page=${page}&size=${pageSize}&sort=${sort},${order}${authorFilter}`, {
         headers: { 'Authorization': `Basic ${auth}` }
       })
       
@@ -63,7 +63,7 @@ export default function AdminDashboard() {
       // Fetch all reports
       let allReports = []
       try {
-        const reportsResponse = await fetch('http://localhost:8081/api/reports', {
+        const reportsResponse = await fetch('https://blogapp-production-66d9.up.railway.app/api/reports', {
           headers: { 'Authorization': `Basic ${auth}` }
         })
         if (reportsResponse.ok) {
@@ -81,7 +81,7 @@ export default function AdminDashboard() {
       
       for (const blog of blogsList) {
         try {
-          const commentsResponse = await fetch(`http://localhost:8081/api/blogs/${blog.id}/comments`, {
+          const commentsResponse = await fetch(`https://blogapp-production-66d9.up.railway.app/api/blogs/${blog.id}/comments`, {
             headers: { 'Authorization': `Basic ${auth}` }
           })
           
