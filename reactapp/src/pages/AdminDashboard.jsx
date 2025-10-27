@@ -31,6 +31,29 @@ export default function AdminDashboard() {
     fetchData()
   }, [])
 
+  const deleteBlog = async (blogId, blogTitle) => {
+    if (!confirm(`Are you sure you want to delete "${blogTitle}"? This action cannot be undone.`)) {
+      return
+    }
+    
+    try {
+      const response = await api.delete(`/api/blogs/${blogId}`)
+      
+      setBlogs(blogs.filter(blog => blog.id !== blogId))
+      setComments(comments.filter(comment => comment.blogId !== blogId))
+      setBlogComments(prev => {
+        const updated = { ...prev }
+        delete updated[blogId]
+        return updated
+      })
+      
+      alert('Blog deleted successfully!')
+    } catch (error) {
+      console.error('Delete error:', error)
+      alert('Failed to delete blog. Please try again.')
+    }
+  }
+
   const fetchData = async (page = 0, sort = sortBy, order = sortOrder) => {
     try {
       setLoading(true)
@@ -132,27 +155,7 @@ export default function AdminDashboard() {
     }
   }
 
-  const deleteBlog = async (blogId, blogTitle) => {
-    if (!confirm(`Are you sure you want to delete "${blogTitle}"? This action cannot be undone.`)) {
-      return
-    }
-    
-    try {
-      // Remove blog from UI state (client-side delete)
-      setBlogs(blogs.filter(blog => blog.id !== blogId))
-      setComments(comments.filter(comment => comment.blogId !== blogId))
-      setBlogComments(prev => {
-        const updated = { ...prev }
-        delete updated[blogId]
-        return updated
-      })
-      
-      alert('Blog removed from dashboard!')
-    } catch (error) {
-      console.error('Delete error:', error)
-      alert('Failed to remove blog.')
-    }
-  }
+
 
   const TabButton = ({ id, label, count }) => (
     <button
@@ -402,6 +405,7 @@ export default function AdminDashboard() {
                               >
                                 Delete
                               </button>
+
                             </div>
                           </div>
                         </div>
