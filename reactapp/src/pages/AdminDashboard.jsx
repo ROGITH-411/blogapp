@@ -138,18 +138,19 @@ export default function AdminDashboard() {
     }
     
     try {
-      await api.delete(`/api/blogs/${blogId}`)
+      // Remove blog from UI state (client-side delete)
       setBlogs(blogs.filter(blog => blog.id !== blogId))
-      // Remove comments for this blog
       setComments(comments.filter(comment => comment.blogId !== blogId))
       setBlogComments(prev => {
         const updated = { ...prev }
         delete updated[blogId]
         return updated
       })
+      
+      alert('Blog removed from dashboard!')
     } catch (error) {
-      console.error('Failed to delete blog:', error)
-      alert('Failed to delete blog. Please try again.')
+      console.error('Delete error:', error)
+      alert('Failed to remove blog.')
     }
   }
 
